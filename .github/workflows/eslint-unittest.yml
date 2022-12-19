@@ -1,0 +1,29 @@
+name: Lint & Unit Test
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: npm i
+      - name: Run ESLint
+        run: npm run lint
+      - name: Run Prettier
+        run: npm run prettier
+      - name: Generate google-credentials
+        run: echo "${{ secrets.GOOGLE_CREDENTIALS }}" >> google-credentials-test-env.json && echo "${{ secrets.GOOGLE_CREDENTIALS }}" >> google-credentials.json
+      - name: Attach web-api-key
+        run: echo ${{ secrets.FIREBASE_WEB_API_KEY }} >> .env.test
+      - name: Set up postgres
+        run: docker compose up -d
+      - name: Run Migrations
+        run: npm run migrate:test
+      - name: Nexus reflect
+        run: npm run reflect
+      - name: Run Test
+        run: npm run test

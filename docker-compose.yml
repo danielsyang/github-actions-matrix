@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  postgres-integration-test:
+    image: postgres
+    restart: always
+    ports:
+      - 5434:5432
+    environment:
+      POSTGRES_USER: prisma
+      POSTGRES_PASSWORD: prisma
+      POSTGRES_DB: integration-tests
+
+volumes:
+  dbdata: {}

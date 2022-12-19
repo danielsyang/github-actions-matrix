@@ -5,7 +5,10 @@ on:
     types: [opened, edited, synchronize, reopened]
 
 jobs:
-  build:
+  ci_matrix:
+    strategy:
+      matrix:
+        test_name: [test:partOne, test:partTwo, test:partThree]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,4 +19,4 @@ jobs:
       - name: Run Migrations
         run: npm run migrate:test
       - name: Run Test
-        run: npm run test
+        run: npm run ${{ matrix.test_name}}

@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "migrate:test": "npx prisma migrate deploy",
-    "test": "jest --runInBand --logHeapUsage"
+    "test": "jest --runInBand --logHeapUsage",
+    "test:partOne": "jest --runInBand --logHeapUsage --shard=1/3",
+    "test:partTwo": "jest --runInBand --logHeapUsage --shard=2/3",
+    "test:partThree": "jest --runInBand --logHeapUsage --shard=3/3"
   },
   "repository": {
     "type": "git",

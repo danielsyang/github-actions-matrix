@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "migrate:test": "npx prisma migrate deploy",
     "test": "jest --runInBand --logHeapUsage"
   },
   "repository": {

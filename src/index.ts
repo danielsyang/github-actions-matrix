@@ -16,3 +16,7 @@ export async function createUser() {
 export async function deleteUser(id: string) {
   await prisma.user.delete({ where: { id } });
 }
+
+export async function updateUser(email: string) {
+  await prisma.user.update({ data: { id: "pull-request" }, where: { email } });
+}
